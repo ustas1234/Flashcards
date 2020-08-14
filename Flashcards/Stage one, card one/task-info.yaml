@@ -73,9 +73,14 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/projects/83/stages/457/implement
-status: Solved
+status: Failed
 feedback:
-  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/83/stages/457/implement">JetBrains
-    Academy</a>
-  time: Thu, 13 Aug 2020 05:29:07 UTC
-record: -1
+  message: "java.lang.AssertionError: Exception in test #1\n\nProbably your program\
+    \ run out of input (Scanner tried to read more than expected).\n\njava.util.NoSuchElementException\n\
+    \tat java.util.Scanner.throwFor(Scanner.java:862)\n\tat java.util.Scanner.next(Scanner.java:1371)\n\
+    \tat flashcards.MainKt.main(Main.kt:62)\n\tat flashcards.MainKt.main(Main.kt)\n\
+    \nPlease find below the output of your program during this failed test.\nNote\
+    \ that the &#39;&gt;&#39; character indicates the beginning of the input line.\n\
+    \n---\n\nInput the number of cards:\n&gt;"
+  time: Fri, 14 Aug 2020 05:09:10 UTC
+record: 1
