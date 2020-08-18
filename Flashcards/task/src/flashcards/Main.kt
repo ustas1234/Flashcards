@@ -1,6 +1,7 @@
 package flashcards
 
 
+import java.lang.Exception
 import java.util.Scanner
 
 
@@ -72,22 +73,27 @@ class CardDesk {
                     println("Correct!")
                 } else {
                     checkAnotherTerm(i, resultOfChecking)
-                    //println("Wrong. The right answer is \"${desk[i].definition}\".")
+
                 }
             }
         }
 
         private fun checkAnotherTerm(originalIndex: Int, definition: String) {
+            var isAnotherTermExists = false
             for (i in desk.indices) {
-                if (definition == desk[i].definition) println("Wrong. The right answer is \"${desk[i].term}\", but your definition is correct for \"${desk[originalIndex].term}\".")
+                if (definition == desk[i].definition) {
+                    println("Wrong. The right answer is \"${desk[originalIndex].definition}\", but your definition is correct for \"${desk[i].term}\".")
+                    isAnotherTermExists = true
+                }
             }
+            if (!isAnotherTermExists) println("Wrong. The right answer is \"${desk[originalIndex].definition}\".")
         }
 
         private fun checkCardDefinition(i: Int): String {
             val result: String
             val scanner = Scanner(System.`in`)
-            val uinput = scanner.nextLine()
             println("Print the definition of \"${desk[i].term}\":")
+            val uinput = scanner.nextLine()
             result = if (uinput == desk[i].definition) "true" else uinput
             return result
         }
@@ -98,10 +104,11 @@ class CardDesk {
 }
 
 fun main() {
-    val scanner = Scanner(System.`in`)
+   // val scanner = Scanner(System.`in`)
 
     println("Input the number of cards:")
-    var uInput = scanner.nextLine()
+    //val uInput = scanner.nextInt()
+    val uInput = readLine() ?: throw Exception("WTF")
 
     CardDesk.createDesk(uInput.toInt())
     CardDesk.checkAllCards()
@@ -110,10 +117,8 @@ fun main() {
         uInput = scanner.next()
         when (uInput) {
             "" -> {
-
             }
         }
-
     } while (uInput != "exit")*/
 
 
