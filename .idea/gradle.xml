@@ -12,6 +12,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Flashcards/task" />
+            <option value="$PROJECT_DIR$/Problems/Fractional part" />
+            <option value="$PROJECT_DIR$/Problems/Max of four numbers" />
+            <option value="$PROJECT_DIR$/Problems/The angle between vectors" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

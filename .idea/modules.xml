@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Flashcards.iml" filepath="$PROJECT_DIR$/.idea/modules/Flashcards.iml" group="Flashcards" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Flashcards/task/Flashcards-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Flashcards/task/Flashcards-task.iml" group="Flashcards/Flashcards-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Fractional part/Problems-Fractional_part.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Fractional part/Problems-Fractional_part.iml" group="Flashcards/Problems-Fractional_part" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Max of four numbers/Problems-Max_of_four_numbers.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Max of four numbers/Problems-Max_of_four_numbers.iml" group="Flashcards/Problems-Max_of_four_numbers" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/The angle between vectors/Problems-The_angle_between_vectors.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/The angle between vectors/Problems-The_angle_between_vectors.iml" group="Flashcards/Problems-The_angle_between_vectors" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util.iml" group="Flashcards/util" />
     </modules>
   </component>
