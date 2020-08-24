@@ -471,6 +471,14 @@ files:
         }
     }
   learner_created: false
+- name: capitals.txt
+  visible: true
+  text: 0|Great Britain|London
+  learner_created: true
+- name: capitalsNew.txt
+  visible: true
+  text: 0|France|Paris
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/83/stages/462/implement
 status: Unchecked
 record: -1

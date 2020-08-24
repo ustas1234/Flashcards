@@ -72,16 +72,22 @@ files:
         }
     }
   learner_created: false
+- name: test/DialogClue.kt
+  visible: true
+  learner_created: true
+- name: test/FlashcardsStage5Test.kt
+  visible: true
+  learner_created: true
+- name: capitalsNew.txt
+  visible: true
+  learner_created: true
+- name: capitals.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/83/stages/457/implement
-status: Failed
+status: Solved
 feedback:
-  message: "java.lang.AssertionError: Exception in test #1\n\nProbably your program\
-    \ run out of input (Scanner tried to read more than expected).\n\njava.util.NoSuchElementException:\
-    \ No line found\n\tat java.util.Scanner.nextLine(Scanner.java:1540)\n\tat flashcards.CardDesk$Companion.fillDataToCard(Main.kt:29)\n\
-    \tat flashcards.CardDesk$Companion.createDesk(Main.kt:17)\n\tat flashcards.MainKt.main(Main.kt:113)\n\
-    \tat flashcards.MainKt.main(Main.kt)\n\nPlease find below the output of your program\
-    \ during this failed test.\nNote that the &#39;&gt;&#39; character indicates the\
-    \ beginning of the input line.\n\n---\n\nInput the number of cards:\n&gt; \nThe\
-    \ card #1:"
-  time: Tue, 18 Aug 2020 05:14:54 UTC
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/83/stages/457/implement">JetBrains
+    Academy</a>
+  time: Fri, 21 Aug 2020 05:08:28 UTC
 record: 1

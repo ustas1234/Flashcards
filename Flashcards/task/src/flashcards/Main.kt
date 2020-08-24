@@ -62,7 +62,6 @@ class CardDesk {
                     println("Correct!")
                 } else {
                     checkAnotherTerm(i, resultOfChecking)
-
                 }
             }
         }*/
@@ -91,7 +90,7 @@ class CardDesk {
             println("The card:")
             val uInput = readLine() ?: throw Exception("WTF")
             if (desk.find { it.term == uInput } != null) {
-                desk.remove(desk.find { it.term == uInput })
+                desk.remove(desk.find { it.term == uInput }!!)
                 println("The card has been removed.")
             } else println("Can't remove \"$uInput\": there is no such card.")
         }
@@ -102,17 +101,18 @@ class CardDesk {
             val numOfQuestions = uInput.toInt()
             var resultOfChecking: String
             var j: Int
-            println("desk.size ${desk.size}")
+            // println("desk.size ${desk.size}")
 
             repeat(numOfQuestions) {
                 j = Random.nextInt(0, desk.size)
-                println(j)
+                //println(j)
 
 
                 resultOfChecking = checkCardDefinition(j)
                 if (resultOfChecking == "true") {
                     println("Correct!")
                 } else {
+                    desk[j].wrongAnswers +=1
                     checkAnotherTerm(j, resultOfChecking)
 
                 }
@@ -126,7 +126,7 @@ class CardDesk {
 
 
             for (i in desk.indices) {
-                var stringFromFlashCard = "$i|${desk[i].term}|${desk[i].definition}"
+                var stringFromFlashCard = "$i|${desk[i].term}|${desk[i].definition}|${desk[i].wrongAnswers}"
                 if (i == 0) file.writeText(stringFromFlashCard) else file.appendText("\n" + stringFromFlashCard)
 
             }
@@ -144,10 +144,17 @@ class CardDesk {
                 val file = File(uInput).readLines()
                 for (str in file) {
                     stringFromFile = str
-                    dataFromFile.add(FlashCard(stringFromFile.split("|")[1], stringFromFile.split("|")[2]))
+                    dataFromFile.add(FlashCard(stringFromFile.split("|")[1], stringFromFile.split("|")[2], stringFromFile.split("|")[3].toInt()))
                 }
 
                 for (i in dataFromFile.indices) {
+                    if (dataFromFile[i].term == desk.find { it.term == dataFromFile[i].term }?.term) {
+                        desk.find { it.term == dataFromFile[i].term }?.definition = dataFromFile[i].definition
+                        desk.find { it.term == dataFromFile[i].term }?.wrongAnswers = dataFromFile[i].wrongAnswers
+                    } else desk.add(dataFromFile[i])
+                }
+
+/*                for (i in dataFromFile.indices) {
                     for (j in desk.indices) {
                         if (dataFromFile[i].term == desk[j].term) {
                             desk[j].definition = dataFromFile[i].definition
@@ -155,7 +162,7 @@ class CardDesk {
                             desk.add(FlashCard(dataFromFile[i].term,dataFromFile[i].definition))
                         }
                     }
-                }
+                }*/
 
                 println("${dataFromFile.size} cards have been loaded.")
 
@@ -163,35 +170,85 @@ class CardDesk {
 
 
         }
+
+        fun showHardestCard() {
+            desk.sortByDescending { it.wrongAnswers }
+            desk.forEach { println(it.wrongAnswers) }
+        }
     }
 
 
-    class FlashCard(var term: String, var definition: String)
+    class FlashCard(var term: String, var definition: String, var wrongAnswers: Int = 0)
+}
+
+class Logs() {
+    companion object {
+        var log: String = ""
+
+        fun saveLogToFile() {
+            println("File name:")
+            log += "File name:\n"
+
+            val uInput = readLine() ?: throw Exception("WTF")
+            log += uInput + '\n'
+
+            val file = File(uInput)
+            println("The log has been saved.")
+            log += "The log has been saved.\n"
+
+            file.writeText(log)
+        }
+    }
 }
 
 fun main() {
     do {
-        println("Input the action (add, remove, import, export, ask, exit):")
+        println("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):")
+        Logs.log = "Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):\n"
 
         val uInput = readLine() ?: throw Exception("WTF")
 
         when (uInput) {
-            "add" -> CardDesk.addingTheCard()
-            "remove" -> CardDesk.removingTheCard()
-            "ask" -> CardDesk.askForRandomCard()
-            "import" -> CardDesk.importFromFile()
-            "export" -> CardDesk.exportToFile()
+            "add" -> {
+                Logs.log += "add\n"
+                CardDesk.addingTheCard()
+            }
+            "remove" -> {
+                Logs.log += "remove\n"
+                CardDesk.removingTheCard()
+            }
+            "ask" -> {
+                Logs.log += "ask\n"
+                CardDesk.askForRandomCard()
+            }
+            "import" -> {
+                Logs.log += "import\n"
+                CardDesk.importFromFile()
+            }
+            "export" -> {
+                Logs.log += "export\n"
+                CardDesk.exportToFile()
+            }
+            "hardest card" -> {
+                Logs.log += "hardest card\n"
+                CardDesk.showHardestCard()
+            }
+            "log" -> {
+                Logs.log += "log\n"
+                Logs.saveLogToFile()
+            }
             "exit" -> {
+                Logs.log += "exit\n"
                 println("Bye bye!")
+                Logs.log += "Bye bye!\n"
                 exitProcess(-1)
             }
 
         }
 
         println("")
+        Logs.log += "\n"
     } while (true)
 
 
 }
-
-
