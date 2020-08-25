@@ -1,1 +1,2 @@
-0|Great Britain|London
+0|Russia|Moscow|7
+1|France|Paris|3

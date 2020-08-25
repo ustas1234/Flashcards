@@ -471,14 +471,20 @@ files:
         }
     }
   learner_created: false
-- name: capitals.txt
-  visible: true
-  text: 0|Great Britain|London
-  learner_created: true
 - name: capitalsNew.txt
   visible: true
   text: 0|France|Paris
   learner_created: true
+- name: testLog.txt
+  visible: true
+  learner_created: true
+- name: capitals.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/83/stages/462/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/83/stages/462/implement">JetBrains
+    Academy</a>
+  time: Tue, 25 Aug 2020 05:43:00 UTC
 record: -1

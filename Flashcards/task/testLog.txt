@@ -1,0 +1,5 @@
+Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):
+log
+File name:
+testLog.txt
+The log has been saved.

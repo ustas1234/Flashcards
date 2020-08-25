@@ -8,6 +8,7 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 
+
 class CardDesk {
     companion object {
         var desk = MutableList(0) { FlashCard("", "") }
@@ -18,13 +19,18 @@ class CardDesk {
             var definition: String
 
             println("The card:")
+            Logs.log += "The card:\n"
             term = scanner.nextLine()
+            Logs.log += term + "\n"
             if (isUnique(term, "term")) {
                 println("The definition of the card:")
+                Logs.log += "The definition of the card:\n"
                 definition = scanner.nextLine()
+                Logs.log += definition + "\n"
                 if (isUnique(definition, "definition")) {
                     desk.add(FlashCard(term, definition))
                     println("The pair (\"$term\":\"$definition\") has been added.")
+                    Logs.log += "The pair (\"$term\":\"$definition\") has been added.\n"
                 }
             }
 
@@ -38,6 +44,7 @@ class CardDesk {
                 for (i in desk.indices) {
                     if (desk[i].term == value) {
                         println("The card \"$value\" already exists.")
+                        Logs.log += "The card \"$value\" already exists.\n"
                         result = false
                     }
                 }
@@ -45,6 +52,7 @@ class CardDesk {
                 for (i in desk.indices) {
                     if (desk[i].definition == value) {
                         println("The definition \"$value\" already exists")
+                        Logs.log += "The definition \"$value\" already exists\n"
                         result = false
                     }
 
@@ -54,50 +62,52 @@ class CardDesk {
             return result
         }
 
-        /*fun checkAllCards() {
-            var resultOfChecking: String
-            for (i in desk.indices) {
-                resultOfChecking = checkCardDefinition(i)
-                if (resultOfChecking == "true") {
-                    println("Correct!")
-                } else {
-                    checkAnotherTerm(i, resultOfChecking)
-                }
-            }
-        }*/
-
         fun checkAnotherTerm(originalIndex: Int, definition: String) {
             var isAnotherTermExists = false
             for (i in desk.indices) {
                 if (definition == desk[i].definition) {
                     println("Wrong. The right answer is \"${desk[originalIndex].definition}\", but your definition is correct for \"${desk[i].term}\".")
+                    Logs.log += "Wrong. The right answer is \"${desk[originalIndex].definition}\", but your definition is correct for \"${desk[i].term}\".\n"
                     isAnotherTermExists = true
                 }
             }
-            if (!isAnotherTermExists) println("Wrong. The right answer is \"${desk[originalIndex].definition}\".")
+            if (!isAnotherTermExists) {
+                println("Wrong. The right answer is \"${desk[originalIndex].definition}\".")
+                Logs.log += "Wrong. The right answer is \"${desk[originalIndex].definition}\".\n"
+            }
         }
 
         fun checkCardDefinition(i: Int): String {
             val result: String
             val scanner = Scanner(System.`in`)
             println("Print the definition of \"${desk[i].term}\":")
+            Logs.log += "Print the definition of \"${desk[i].term}\":\n"
             val uinput = scanner.nextLine()
+            Logs.log += uinput + "\n"
             result = if (uinput == desk[i].definition) "true" else uinput
             return result
         }
 
         fun removingTheCard() {
             println("The card:")
+            Logs.log += "The card:\n"
             val uInput = readLine() ?: throw Exception("WTF")
+            Logs.log += uInput + "\n"
             if (desk.find { it.term == uInput } != null) {
                 desk.remove(desk.find { it.term == uInput }!!)
                 println("The card has been removed.")
-            } else println("Can't remove \"$uInput\": there is no such card.")
+                Logs.log += "The card has been removed.\n"
+            } else {
+                println("Can't remove \"$uInput\": there is no such card.")
+                Logs.log += "Can't remove \"$uInput\": there is no such card.\n"
+            }
         }
 
         fun askForRandomCard() {
             println("How many times to ask?")
+            Logs.log += "How many times to ask?\n"
             val uInput = readLine() ?: throw Exception("WTF")
+            Logs.log += uInput + "\n"
             val numOfQuestions = uInput.toInt()
             var resultOfChecking: String
             var j: Int
@@ -111,8 +121,9 @@ class CardDesk {
                 resultOfChecking = checkCardDefinition(j)
                 if (resultOfChecking == "true") {
                     println("Correct!")
+                    Logs.log += "Correct!\n"
                 } else {
-                    desk[j].wrongAnswers +=1
+                    desk[j].wrongAnswers += 1
                     checkAnotherTerm(j, resultOfChecking)
 
                 }
@@ -121,9 +132,10 @@ class CardDesk {
 
         fun exportToFile() {
             println("File name:")
+            Logs.log += "File name:\n"
             val uInput = readLine() ?: throw Exception("WTF")
+            Logs.log += uInput + "\n"
             val file = File(uInput)
-
 
             for (i in desk.indices) {
                 var stringFromFlashCard = "$i|${desk[i].term}|${desk[i].definition}|${desk[i].wrongAnswers}"
@@ -133,13 +145,16 @@ class CardDesk {
 
 
             println("${desk.size} cards have been saved.")
+            Logs.log += "${desk.size} cards have been saved.\n"
         }
 
         fun importFromFile() {
             var dataFromFile = MutableList(0) { FlashCard("", "") }
             var stringFromFile = ""
             println("File name:")
+            Logs.log += "File name:\n"
             val uInput = readLine() ?: throw Exception("WTF")
+            Logs.log += uInput + "\n"
             if (File(uInput).exists()) {
                 val file = File(uInput).readLines()
                 for (str in file) {
@@ -154,26 +169,51 @@ class CardDesk {
                     } else desk.add(dataFromFile[i])
                 }
 
-/*                for (i in dataFromFile.indices) {
-                    for (j in desk.indices) {
-                        if (dataFromFile[i].term == desk[j].term) {
-                            desk[j].definition = dataFromFile[i].definition
-                        } else {
-                            desk.add(FlashCard(dataFromFile[i].term,dataFromFile[i].definition))
-                        }
-                    }
-                }*/
-
                 println("${dataFromFile.size} cards have been loaded.")
+                Logs.log += "${dataFromFile.size} cards have been loaded.\n"
 
-            } else println("File not found.")
+            } else {
+                println("File not found.")
+                Logs.log += "File not found.\n"
+            }
 
 
         }
 
         fun showHardestCard() {
+            var maxMistakes = 0
             desk.sortByDescending { it.wrongAnswers }
-            desk.forEach { println(it.wrongAnswers) }
+            if (desk.size > 0) maxMistakes = desk[0].wrongAnswers
+            var tempList = MutableList(0) { FlashCard("", "") }
+            //desk.forEach { println(it.wrongAnswers) }
+
+            if (maxMistakes == 0) {
+                println("There are no cards with errors.")
+                Logs.log += "There are no cards with errors.\n"
+            } else {
+                for (i in 0..desk.lastIndex) {
+                    if (desk[i].wrongAnswers == maxMistakes) {
+                        //tempList.clear()
+                        tempList.add(desk[i])
+                    }
+                }
+                if (tempList.size == 1) {
+                    println("The hardest card is \"${tempList[0].term}\". You have ${tempList[0].wrongAnswers} errors answering it.")
+                    Logs.log += "The hardest card is \"${tempList[0].term}\". You have ${tempList[0].wrongAnswers} errors answering it.\n"
+                } else {
+                    val tempStr = tempList.joinToString { "\"${it.term}\"" }
+                    println("The hardest cards are $tempStr. You have ${tempList[0].wrongAnswers} errors answering them.")
+                    Logs.log += "The hardest cards are $tempStr. You have ${tempList[0].wrongAnswers} errors answering them."
+                }
+            }
+
+
+        }
+
+        fun resetStats() {
+            desk.forEach { it.wrongAnswers = 0 }
+            println("Card statistics has been reset.")
+            Logs.log += "Card statistics has been reset.\n"
         }
     }
 
@@ -236,6 +276,10 @@ fun main() {
             "log" -> {
                 Logs.log += "log\n"
                 Logs.saveLogToFile()
+            }
+            "reset stats" -> {
+                Logs.log += "reset stats\n"
+                CardDesk.resetStats()
             }
             "exit" -> {
                 Logs.log += "exit\n"
