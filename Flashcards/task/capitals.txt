@@ -1,2 +1,2 @@
-0|Russia|Moscow|7
-1|France|Paris|3
+0|France|Paris|2
+1|Russia|Moscow|4

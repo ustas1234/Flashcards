@@ -8,7 +8,6 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 
-
 class CardDesk {
     companion object {
         var desk = MutableList(0) { FlashCard("", "") }
@@ -130,11 +129,14 @@ class CardDesk {
             }
         }
 
-        fun exportToFile() {
-            println("File name:")
-            Logs.log += "File name:\n"
-            val uInput = readLine() ?: throw Exception("WTF")
-            Logs.log += uInput + "\n"
+        fun exportToFile(file: String = "null") {
+            val uInput: String
+            if (file == "null") {
+                println("File name:")
+                Logs.log += "File name:\n"
+                uInput = readLine() ?: throw Exception("WTF")
+                Logs.log += uInput + "\n"
+            } else uInput = file
             val file = File(uInput)
 
             for (i in desk.indices) {
@@ -148,13 +150,16 @@ class CardDesk {
             Logs.log += "${desk.size} cards have been saved.\n"
         }
 
-        fun importFromFile() {
+        fun importFromFile(file: String = "null") {
             var dataFromFile = MutableList(0) { FlashCard("", "") }
             var stringFromFile = ""
-            println("File name:")
-            Logs.log += "File name:\n"
-            val uInput = readLine() ?: throw Exception("WTF")
-            Logs.log += uInput + "\n"
+            var uInput: String
+            if (file == "null") {
+                println("File name:")
+                Logs.log += "File name:\n"
+                uInput = readLine() ?: throw Exception("WTF")
+                Logs.log += uInput + "\n"
+            } else uInput = file
             if (File(uInput).exists()) {
                 val file = File(uInput).readLines()
                 for (str in file) {
@@ -241,7 +246,21 @@ class Logs() {
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
+   // args.forEach { println(it) }
+    var importFile = "null"
+    var exportFile = "null"
+    if (args.isNotEmpty()) {
+        for (i in 0..args.lastIndex) {
+            if (args[i] == "-import" && args[i + 1].isNotEmpty()) importFile = args[i + 1]
+            if (args[i] == "-export" && args[i + 1].isNotEmpty()) exportFile = args[i + 1]
+        }
+    }
+
+    if (importFile != "null") {
+        CardDesk.importFromFile(importFile)
+    }
+
     do {
         println("Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):")
         Logs.log = "Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):\n"
@@ -285,6 +304,9 @@ fun main() {
                 Logs.log += "exit\n"
                 println("Bye bye!")
                 Logs.log += "Bye bye!\n"
+
+                if (exportFile != "null") CardDesk.exportToFile(exportFile)
+
                 exitProcess(-1)
             }
 

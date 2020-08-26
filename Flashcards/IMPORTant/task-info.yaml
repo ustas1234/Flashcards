@@ -482,6 +482,28 @@ files:
         }
     }
   learner_created: false
+- name: capitals.txt
+  visible: true
+  text: |-
+    0|Russia|Moscow|7
+    1|France|Paris|3
+  learner_created: true
+- name: testLog.txt
+  visible: true
+  text: |
+    Input the action (add, remove, import, export, ask, exit, log, hardest card, reset stats):
+    log
+    File name:
+    testLog.txt
+    The log has been saved.
+  learner_created: false
+- name: capitalsNew.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/83/stages/463/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/83/stages/463/implement">JetBrains
+    Academy</a>
+  time: Wed, 26 Aug 2020 05:08:00 UTC
 record: -1
